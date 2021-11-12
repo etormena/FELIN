@@ -7,26 +7,33 @@ Created on Tue Oct 19 19:12:39 2021
 
 import numpy as np
 from openmdao.api import ExplicitComponent
-from functions import chemical_react, radiative_forcing
+import environment.env_models as enm
+class Environment_comp(ExplicitComponent):
 
-class Trajectory_comp(ExplicitComponent):
-
-    def setup(self): #/!\TO BE CHANGED ALL VAR NAMES AND VALUES /!\
+    def setup(self):
 
         #Inputs
-        self.add_input('m_prop', val=0)
-        self.add_input('prop_type', val=0)
-        self.add_input('altitude', val=0)
-        self.add_input('m_vehicle', val = 0)
-        self.add_input('m_dry', val = 0) #depends on staging
+        self.add_input('Prop_mass_stage_1', val = 1e5)
+        self.add_input('Prop_mass_stage_2', val = 1e5)
+        self.add_input('OF_stage_1', val = 1e5)
+        self.add_input('OF_stage_2', val = 1e5)
+        self.add_input('r_ascent', shape = 4000)
+        self.add_input('Dry_mass_stage_1', val = 1e4) 
+        self.add_input('Dry_mass_stage_2', val = 1e4)
+        self.add_input('GLOW', val = 1e5)
         
         ## Outputs
-        self.add_output('stratospheric_emissions',shape = 0) 
-        self.add_output('RF', val=0)
+        self.add_output('Radiative_Forcing', val = 0)
 
     def compute(self, inputs, outputs):
-        treshold = 20e3; #meter of altitude (can be changed)
-        if inputs['altitude'] > treshold:
-            mass_propellant = inputs['m_vehicle'] - inputs['m_dry']
-            products = chemical_react('prop_type',mass_propellant)
-            outputs['RF'] = radiative_forcing(products)
+# =============================================================================
+#         treshold = 20e3; #meter of altitude (can be changed)
+#         if inputs['r_ascent'] > treshold:
+#             mass_propellant = inputs['GLOW'] - m_DRY [at moment t (how?)]
+# =============================================================================
+        prop_type = 'LOX/RP-1'
+        stratospheric_emissions = enm.chemical_react(prop_type,inputs['Prop_mass_stage_1'],
+                                  inputs['OF_stage_1'],
+                                  inputs['Prop_mass_stage_2'],
+                                  inputs['OF_stage_2'])
+        outputs['Radiative_Forcing'] = enm.radiative_forcing(stratospheric_emissions)
