@@ -376,8 +376,8 @@ class Trajectory_comp(ExplicitComponent):
         state_separation_stage_1 = current_sol.y[:,-1].copy() 
         outputs['state_separation_stage_1'] = state_separation_stage_1
         outputs['max_pdyn_load_ascent_stage_1'] = np.max(data_simu['pdyn'])
-        
-####################################### 2nd stage ####################################################################
+
+# ###################################### 2nd stage ####################################################################
 
         instant_end_flight_stage_1 = current_sol.t[-1].copy()
         outputs['alpha_cont']=np.max(np.abs(data_simu['alpha']))
@@ -705,4 +705,4 @@ class Trajectory_comp(ExplicitComponent):
             outputs['longi_fallout'][0:Nb_pt_fallout] = data_simu_fallout['longi'].T[0]   
             outputs['m_fallout'][0:Nb_pt_fallout] = data_simu_fallout['m'].T[0]  
             outputs['distance_fallout'][0:Nb_pt_fallout] = data_simu_fallout['distance'].T[0]
-        
+
