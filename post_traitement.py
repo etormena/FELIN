@@ -84,6 +84,11 @@ def post_traitement(Pb):
     
     flux_max_ascent = np.max(abs(Pb['flux_ascent'][0:Nb_final])/1000.)
     penal_flux_ascent =  flux_max_ascent/1e3-Spec.specifications['command']['ascent']['flux_max']
+    
+    ####---- Constraint on ascent for maximal angle of attack
+    RF_max = 0.01 #mW/m^2
+    RF = Pb['Radiative Forcing'][0]
+    penal_RF = RF - RF_max
 
     #### ---- Gross-Lift-Off Weight and constraints
     
