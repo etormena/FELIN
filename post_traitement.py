@@ -94,6 +94,11 @@ def post_traitement(Pb):
     
     GLOW = Pb['GLOW']
     
+    #### ---- Gross-Lift-Off Weight and constraints
+    RF_max = 0.005 #mW/m^2
+    RF = Pb['Radiative_Forcing']
+    penal_rf = RF - RF_max
+    
     if type(GLOW)== np.float64:
         GLOW = GLOW
     else :
@@ -105,7 +110,8 @@ def post_traitement(Pb):
                                    penal_perigee/1e2,\
                                    penal_mass_prop/1e3,\
                                    penal_pdyn_ascent,\
-                                   penal_flux_ascent/1e3])
+                                   penal_flux_ascent/1e3,\
+                                   penal_rf*1e2]) #change order of magnitude as other constraints
     
     
       

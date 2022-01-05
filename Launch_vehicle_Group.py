@@ -96,6 +96,6 @@ class Launcher_vehicle(Group):
                                                     'r_ascent','Dry_mass_stage_1','Dry_mass_stage_2','GLOW'],
                                promotes_outputs=['Radiative_Forcing','Emissions_CO2',
                                                  'Emissions_H2O', 'Emissions_BC'])
-          
+
         
 

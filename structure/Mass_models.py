@@ -42,7 +42,7 @@ def sizing(Mprop, OF, D,type_fuel):
 def engine_mass(T, type_prop, feed): 
 
 #T in N !!!
-#See PhD thesis Castellini 2012, Polytechnico di Milano
+#See PhD thesis Castellini 2012, Politecnico di Milano
  
 	if type_prop == 'Cryogenic':
 
@@ -122,7 +122,7 @@ def thrust_frame_mass(T,M_eng,n_ax_max,N_eng,material,SSM):
 	return (0.013*N_eng**0.795*(224.81*T)**0.579+0.01*N_eng*(M_eng/(0.45))**0.717)*0.45*(1.5*SSM*n_ax_max*9.80665)*k_SM
 	
 def tank_mass(P_dyn_max,n_ax_max,P_tanks_Ox,P_tanks_F,V_FT,V_Ox,D,S_Ox,S_F,S_dome,S_totale,type_prop,config,type_stage,type_struct):
-    #See PhD thesis Castellini 2012, Polytechnico di Milano
+    #See PhD thesis Castellini 2012, Politecnico di Milano
 
 	#Mass tanks
 	# Parametres
@@ -180,7 +180,7 @@ def tank_mass(P_dyn_max,n_ax_max,P_tanks_Ox,P_tanks_F,V_FT,V_Ox,D,S_Ox,S_F,S_dom
 	return M_FT,M_OxT,M_TPS_OxT,M_TPS_FT,M_inter_tank
 	
 def TVC_mass(T, techno):
-    #See PhD thesis Castellini 2012, Polytechnico di Milano
+    #See PhD thesis Castellini 2012, Politecnico di Milano
 
 	if techno == 'electromechanic':
 		return 0.1078*(T*10**-3)+43.702
