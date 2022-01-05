@@ -10,10 +10,6 @@ def chemical_react(prop_type,mass,of):
         mass_CO2 = 0
         mass_H2O = m_fuel * (1.008*2 + 16)/(1.008*2)
         mass_BC = 0
-    if prop_type == 'CH4':
-        mass_CO2 = 0.995 * m_fuel * (12.01 + 16*2)/(12.01 + 1.008*4)
-        mass_H2O = 0.995 * m_fuel * 2 * (16 + 1.008*2)/(12.01 + 1.008*4)
-        mass_BC = 0.005 * m_fuel
     return mass_CO2, mass_H2O, mass_BC
 
 def radiative_forcing(co2, h2o, bc):
