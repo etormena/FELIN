@@ -97,4 +97,4 @@ class Dry_Mass_stage_1_Comp(ExplicitComponent):
                         M_interstage+Constants['Masse_aux_stage_1']
                         
         outputs['Dry_mass_stage_1']=Dry_mass_stage_1
-        
+

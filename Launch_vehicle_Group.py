@@ -11,6 +11,7 @@ import trajectory.Trajectory as Trajectory
 import structure.Dry_Mass_stage_1 as Dry_Mass_stage_1 
 import structure.Dry_Mass_stage_2 as Dry_Mass_stage_2
 import aerodynamics.Aerodynamics as Aerodynamics
+import environment.Environment as Environment
 
 class Launcher_vehicle(Group):
            
@@ -46,7 +47,6 @@ class Launcher_vehicle(Group):
         indeps.add_output('is_fallout',1.)        
         
         indeps.add_output('command_stage_1_exo',np.array([1.,1.]))
-
         
         cycle = self.add_subsystem('cycle', Group(), promotes=['*'])
         
@@ -90,7 +90,12 @@ class Launcher_vehicle(Group):
                                                      'lat_fallout','gamma_fallout','longi_fallout','thrust_fallout',
                                                      'mass_flow_rate_fallout','Mach_fallout','pdyn_fallout',
                                                      'rho_fallout','distance_fallout',])
-    
+
+        Envi = cycle.add_subsystem('Envi', Environment.Environment_comp(),
+                               promotes_inputs=['Prop_mass_stage_1','Prop_mass_stage_2','OF_stage_1','OF_stage_2',
+                                                    'r_ascent','Dry_mass_stage_1','Dry_mass_stage_2','GLOW'],
+                               promotes_outputs=['Radiative_Forcing','Emissions_CO2',
+                                                 'Emissions_H2O', 'Emissions_BC'])
           
         
 
